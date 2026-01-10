@@ -71,7 +71,7 @@ No installation or build process required.
 1.  Clone the repository:
 
     ``` bash
-    git clone https://github.com/your-username/team-conversation-deck.git
+    git clone https://github.com/chris-dewey-1991/Team-Building-Activities.git
     ```
 
 2.  Open `index.html` in your browser.
