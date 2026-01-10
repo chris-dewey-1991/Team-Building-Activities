@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Team Conversation Deck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Modern, clean font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-dark">
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="title-block">
+        <div class="title-icon">🎴</div>
+        <div>
+          <h1 class="app-title">Team Conversation Deck</h1>
+          <p class="subtitle">Draw a random conversation card to spark meaningful team moments.</p>
+        </div>
+      </div>
+      <div class="badge-row">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span id="total-count">0</span> cards available
+        </div>
+        <div class="badge badge-secondary">
+          Safe draw &nbsp;•&nbsp; no repeats until reshuffle
+        </div>
+        <button id="theme-toggle" type="button" class="theme-toggle-btn">
+          <span class="mode-icon">🌙</span>
+          <span class="mode-label">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- Card area -->
+      <section class="table-area" aria-label="Conversation card display">
+        <div class="card-stack">
+          <article id="card" class="card" aria-live="polite">
+            <div class="card-inner">
+              <span class="card-placeholder card-question">
+                Tap <strong>Draw Card</strong> to shuffle the deck and reveal your first question.
+              </span>
+            </div>
+            <footer class="card-footer">
+              <div class="card-footer-left">
+                <span id="card-category" class="card-category-pill cat-generic" style="visibility:hidden;">
+                  Category
+                </span>
+              </div>
+              <div class="card-footer-right">
+                <span id="card-index-display" class="card-index-text">Deck not started</span>
+              </div>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <!-- Controls / info area -->
+      <aside class="controls-panel" aria-label="Controls">
+        <div class="controls-row">
+          <div class="buttons">
+            <button class="btn-primary" id="draw-btn">
+              <span>Draw Card</span> ⏱
+            </button>
+            <button class="btn-secondary" id="reset-btn">
+              <span>Reset</span> 🔁
+            </button>
+          </div>
+
+          <div class="counter" id="counter-text">
+            <span class="counter-pill"></span>
+            0 / 0 cards used
+          </div>
+        </div>
+
+        <div class="controls-row controls-row-secondary">
+          <label class="filter-label">
+            Category
+            <select id="category-filter">
+              <option value="all">All categories</option>
+              <option value="Fun">Fun</option>
+              <option value="Reflect">Reflect</option>
+              <option value="Teamwork">Teamwork</option>
+              <option value="Growth">Growth</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Wellbeing">Wellbeing</option>
+              <option value="Communication">Communication</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="hint-text">
+          Each draw flips a fresh card from the current deck (no repeats until you shuffle).
+          Press <span class="hint-key">Enter</span> to draw again quickly in a session.
+        </p>
+
+        <section class="history" aria-label="Recent cards">
+          <div class="history-header">Recent cards</div>
+          <ul id="history-list" class="history-list"></ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Footer at bottom-right of the page -->
+  <div class="page-footer">
+    Version 2.0 &nbsp;•&nbsp; &copy; Chris Dewey
+  </div>
+
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
