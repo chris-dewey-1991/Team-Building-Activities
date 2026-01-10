@@ -1,5 +1,12 @@
 # 🎴 Team Conversation Deck
 
+![html](https://img.shields.io/badge/HTML5-%23E34F26?logo=html5&logoColor=white)
+![css](https://img.shields.io/badge/CSS3-%231572B6?logo=css3&logoColor=white)
+![javascript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow?logo=javascript&logoColor=black)
+![platform](https://img.shields.io/badge/Platform-Web-lightgrey)
+![version](https://img.shields.io/badge/Version-v2.0-purple)
+![license](https://img.shields.io/badge/License-MIT-green)
+
 A lightweight, zero-backend web app that helps teams spark meaningful
 conversations through randomly drawn question cards.
 
