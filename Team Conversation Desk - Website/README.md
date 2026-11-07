@@ -20,9 +20,9 @@ and thoughtful discussion through simple, focused prompts.
 
 ## ✨ Features
 
--   🎴 **179 fresh conversation cards** (new in v3.0) across 8 categories:
+-   🎴 **223 fresh conversation cards** (new in v3.0) across 10 categories:
     Fun, Would You Rather, Reflect, Teamwork, Communication, Growth,
-    Productivity and Wellbeing
+    Productivity, Wellbeing, AI and Cyber Security
 -   🌡 **Depth filter**: Light, Medium and Deep, so you can match the
     questions to how well the group knows each other
 -   🗂 **Multi-select categories**: mix and match any combination
@@ -118,6 +118,8 @@ under the "Category colours" section.
 -   Growth
 -   Productivity
 -   Wellbeing
+-   AI
+-   Cyber Security
 
 ------------------------------------------------------------------------
 

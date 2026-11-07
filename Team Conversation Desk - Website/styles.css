@@ -80,6 +80,8 @@
 [data-cat="growth"]           { --cat: #166534; --cat-dot: #4ade80; }
 [data-cat="productivity"]     { --cat: #92400e; --cat-dot: #fbbf24; }
 [data-cat="wellbeing"]        { --cat: #be185d; --cat-dot: #f472b6; }
+[data-cat="ai"]               { --cat: #4338ca; --cat-dot: #818cf8; }
+[data-cat="cyber-security"]   { --cat: #b91c1c; --cat-dot: #f87171; }
 
 :root[data-theme="light"] [data-cat] { --cat-dot: var(--cat); }
 @media (prefers-color-scheme: light) {
