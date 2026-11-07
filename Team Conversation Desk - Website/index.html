@@ -2,116 +2,170 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Team Conversation Deck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team Conversation Deck</title>
+  <meta name="description" content="Draw a random conversation card to spark better team meetings, retros, 1:1s and workshops." />
+  <meta name="theme-color" content="#0f2a22" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='6' y='3' width='20' height='26' rx='4' fill='%23e3b341'/%3E%3Cpath d='M16 10l2.2 4.5 4.8.6-3.5 3.3.9 4.8L16 20.9l-4.4 2.3.9-4.8L9 15.1l4.8-.6z' fill='%230f2a22'/%3E%3C/svg%3E" />
 
-  <!-- Modern, clean font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Apply saved theme before paint to avoid a flash
+    try {
+      var t = localStorage.getItem("tcd-theme");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
 </head>
-<body class="theme-dark">
-  <div class="app-shell">
-    <header class="app-header">
-      <div class="title-block">
-        <div class="title-icon">🎴</div>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+    <symbol id="i-shrink" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></symbol>
+    <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.9L12 17.6 5.9 20.9l1.2-6.9-5-4.8L9 8.3z"/></symbol>
+    <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#card">Skip to card</a>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"><svg><use href="#i-star"/></svg></span>
         <div>
-          <h1 class="app-title">Team Conversation Deck</h1>
-          <p class="subtitle">Draw a random conversation card to spark meaningful team moments.</p>
+          <h1 class="brand-title">Team Conversation Deck</h1>
+          <p class="brand-sub">Better questions for better team conversations</p>
         </div>
       </div>
-      <div class="badge-row">
-        <div class="badge">
-          <span class="badge-dot"></span>
-          <span id="total-count">0</span> cards available
-        </div>
-        <div class="badge badge-secondary">
-          Safe draw &nbsp;•&nbsp; no repeats until reshuffle
-        </div>
-        <button id="theme-toggle" type="button" class="theme-toggle-btn">
-          <span class="mode-icon">🌙</span>
-          <span class="mode-label">Dark</span>
+      <div class="topbar-actions">
+        <button id="shortcuts-btn" class="icon-btn" type="button" aria-label="Keyboard shortcuts" title="Keyboard shortcuts">
+          <svg><use href="#i-keyboard"/></svg>
+        </button>
+        <button id="focus-btn" class="icon-btn" type="button" aria-label="Presenter mode" title="Presenter mode (F)">
+          <svg><use href="#i-expand"/></svg>
+        </button>
+        <button id="theme-btn" class="icon-btn" type="button" aria-label="Switch to light mode" title="Toggle theme (T)">
+          <svg><use href="#i-sun"/></svg>
         </button>
       </div>
     </header>
 
-    <div class="main-layout">
-      <!-- Card area -->
-      <section class="table-area" aria-label="Conversation card display">
-        <div class="card-stack">
-          <article id="card" class="card" aria-live="polite">
+    <main class="layout">
+      <section class="table" aria-label="Card table">
+        <div class="stage">
+          <div class="deck-pile" aria-hidden="true"></div>
+          <article id="card" class="card is-back" tabindex="-1" aria-live="polite" aria-atomic="true">
             <div class="card-inner">
-              <span class="card-placeholder card-question">
-                Tap <strong>Draw Card</strong> to shuffle the deck and reveal your first question.
-              </span>
+              <div class="card-face card-front" data-cat="">
+                <div class="card-top">
+                  <span class="card-cat" id="card-cat"></span>
+                  <span class="card-depth" id="card-depth"></span>
+                </div>
+                <p class="card-question" id="card-question"></p>
+                <p class="card-hint" id="card-hint"></p>
+                <div class="card-bottom">
+                  <span class="card-number" id="card-number"></span>
+                  <button id="copy-btn" class="card-copy" type="button" aria-label="Copy question" title="Copy question">
+                    <svg><use href="#i-copy"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="card-face card-back" aria-hidden="true">
+                <div class="back-pattern">
+                  <span class="back-mark"><svg><use href="#i-star"/></svg></span>
+                  <span class="back-label" id="back-label">Tap Draw to begin</span>
+                </div>
+              </div>
             </div>
-            <footer class="card-footer">
-              <div class="card-footer-left">
-                <span id="card-category" class="card-category-pill cat-generic" style="visibility:hidden;">
-                  Category
-                </span>
-              </div>
-              <div class="card-footer-right">
-                <span id="card-index-display" class="card-index-text">Deck not started</span>
-              </div>
-            </footer>
           </article>
+        </div>
+
+        <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+        <div class="controls">
+          <button id="prev-btn" class="btn btn-ghost" type="button" aria-label="Previous card" title="Previous card (←)">
+            <svg><use href="#i-back"/></svg><span class="btn-label">Back</span>
+          </button>
+          <button id="draw-btn" class="btn btn-primary" type="button" title="Draw next card (Space)">
+            <span id="draw-label">Draw card</span><svg><use href="#i-next"/></svg>
+          </button>
+          <button id="shuffle-btn" class="btn btn-ghost" type="button" aria-label="Shuffle deck" title="Shuffle deck (S)">
+            <svg><use href="#i-shuffle"/></svg><span class="btn-label">Shuffle</span>
+          </button>
+        </div>
+
+        <p class="status" id="status" role="status"></p>
+
+        <div class="timer" id="timer" hidden>
+          <svg class="timer-ring" viewBox="0 0 44 44" aria-hidden="true">
+            <circle cx="22" cy="22" r="19" class="ring-bg"/>
+            <circle cx="22" cy="22" r="19" class="ring-fg" id="timer-ring"/>
+          </svg>
+          <span class="timer-text" id="timer-text">1:00</span>
         </div>
       </section>
 
-      <!-- Controls / info area -->
-      <aside class="controls-panel" aria-label="Controls">
-        <div class="controls-row">
-          <div class="buttons">
-            <button class="btn-primary" id="draw-btn">
-              <span>Draw Card</span> ⏱
-            </button>
-            <button class="btn-secondary" id="reset-btn">
-              <span>Reset</span> 🔁
-            </button>
+      <aside class="panel" aria-label="Deck settings">
+        <section class="panel-block">
+          <div class="panel-head">
+            <h2>Categories</h2>
+            <button type="button" class="link-btn" id="cat-all">Select all</button>
           </div>
+          <div class="chips" id="cat-chips" role="group" aria-label="Categories"></div>
+        </section>
 
-          <div class="counter" id="counter-text">
-            <span class="counter-pill"></span>
-            0 / 0 cards used
+        <section class="panel-block">
+          <div class="panel-head"><h2>Depth</h2></div>
+          <div class="segmented" id="depth-chips" role="group" aria-label="Question depth"></div>
+          <p class="panel-note">Start light with new teams. Save deep cards for when there’s trust.</p>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-head">
+            <h2><svg class="h-icon"><use href="#i-timer"/></svg>Talk timer</h2>
           </div>
-        </div>
+          <div class="segmented" id="timer-chips" role="group" aria-label="Talk timer per card"></div>
+        </section>
 
-        <div class="controls-row controls-row-secondary">
-          <label class="filter-label">
-            Category
-            <select id="category-filter">
-              <option value="all">All categories</option>
-              <option value="Fun">Fun</option>
-              <option value="Reflect">Reflect</option>
-              <option value="Teamwork">Teamwork</option>
-              <option value="Growth">Growth</option>
-              <option value="Productivity">Productivity</option>
-              <option value="Wellbeing">Wellbeing</option>
-              <option value="Communication">Communication</option>
-            </select>
-          </label>
-        </div>
-
-        <p class="hint-text">
-          Each draw flips a fresh card from the current deck (no repeats until you shuffle).
-          Press <span class="hint-key">Enter</span> to draw again quickly in a session.
-        </p>
-
-        <section class="history" aria-label="Recent cards">
-          <div class="history-header">Recent cards</div>
-          <ul id="history-list" class="history-list"></ul>
+        <section class="panel-block">
+          <div class="panel-head">
+            <h2>Recent cards</h2>
+            <span class="count-pill" id="deck-count">0 cards</span>
+          </div>
+          <ol class="history" id="history"></ol>
+          <p class="panel-note history-empty" id="history-empty">Cards you draw will appear here. Click one to go back to it.</p>
         </section>
       </aside>
-    </div>
+    </main>
+
+    <footer class="footer">
+      <span>Version 3.0 · © Chris Dewey</span>
+      <span class="footer-keys">Space draw · ← back · S shuffle · F presenter</span>
+    </footer>
   </div>
 
-  <!-- Footer at bottom-right of the page -->
-  <div class="page-footer">
-    Version 2.0 &nbsp;•&nbsp; &copy; Chris Dewey
-  </div>
+  <dialog id="shortcuts" class="dialog" aria-labelledby="shortcuts-title">
+    <h2 id="shortcuts-title">Keyboard shortcuts</h2>
+    <dl class="keys">
+      <dt><kbd>Space</kbd> / <kbd>Enter</kbd> / <kbd>→</kbd></dt><dd>Draw the next card</dd>
+      <dt><kbd>←</kbd></dt><dd>Go back a card</dd>
+      <dt><kbd>S</kbd></dt><dd>Shuffle the deck</dd>
+      <dt><kbd>F</kbd></dt><dd>Presenter mode (great for screen-sharing)</dd>
+      <dt><kbd>T</kbd></dt><dd>Switch light / dark theme</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Close this or leave presenter mode</dd>
+    </dl>
+    <form method="dialog"><button class="btn btn-primary" type="submit">Got it</button></form>
+  </dialog>
 
   <script src="cards.js"></script>
   <script src="app.js"></script>

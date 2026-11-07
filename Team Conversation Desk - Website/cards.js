@@ -1,877 +1,217 @@
-// cards.js
-// Expose the full card deck as a global for app.js
+// cards.js — Team Conversation Deck v3.0
+//
+// Every card is one object:
+//   text      the question shown on the card
+//   category  one of the categories listed in CATEGORIES below
+//   depth     1 = Light (quick, low-stakes), 2 = Medium, 3 = Deep (needs trust)
+//   hint      optional nudge shown under the question
+//
+// To add a card, copy any line block below, change the text and save.
+
+window.CATEGORIES = [
+  { id: "Fun",            label: "Fun",            blurb: "Light icebreakers to warm the room up" },
+  { id: "Would You Rather", label: "Would You Rather", blurb: "Pick a side and defend it" },
+  { id: "Reflect",        label: "Reflect",        blurb: "Look back and make sense of things" },
+  { id: "Teamwork",       label: "Teamwork",       blurb: "How we work together" },
+  { id: "Communication",  label: "Communication",  blurb: "How we talk, listen and give feedback" },
+  { id: "Growth",         label: "Growth",         blurb: "Learning, stretch and career" },
+  { id: "Productivity",   label: "Productivity",   blurb: "Focus, habits and getting things done" },
+  { id: "Wellbeing",      label: "Wellbeing",      blurb: "Energy, rest and looking after yourself" },
+];
+
 window.CARDS = [
   // ---------- FUN ----------
-{
-        text: `What’s one thing most people here don’t know about you?`,
-        category: `Fun`,
-        hint: `Share something light but real – a hobby, experience, or fun fact.`
-      },
-      {
-        text: `If you had to describe yourself in three words, what would they be?`,
-        category: `Fun`,
-        hint: `Go with the first honest words that come to mind, not the “perfect” ones.`
-      },
-      {
-        text: `If today had a theme song, what would it be and why?`,
-        category: `Fun`,
-        hint: `Think about how today feels rather than your all-time favourite song.`
-      },
-      {
-        text: `What’s a hobby or interest you’ve picked up in the last year?`,
-        category: `Fun`,
-        hint: `It can be tiny – a new recipe, a game, a craft, anything.`
-      },
-      {
-        text: `What’s your usual coffee/tea (or drink) order, and what does it say about you?`,
-        category: `Fun`,
-        hint: `Be playful with the “what it says about you” part.`
-      },
-      {
-        text: `What’s one thing that reliably makes you laugh?`,
-        category: `Fun`,
-        hint: `Think of a person, show, meme, or type of situation.`
-      },
-      {
-        text: `Where did you grow up, and what’s one thing you loved about it?`,
-        category: `Fun`,
-        hint: `Pick one memory, tradition, or place that stands out.`
-      },
-      {
-        text: `What’s a favourite tradition (family, cultural, or personal) you enjoy?`,
-        category: `Fun`,
-        hint: `Describe what happens and why it’s special to you.`
-      },
-      {
-        text: `What’s a podcast, book, or show you’ve enjoyed recently and why?`,
-        category: `Fun`,
-        hint: `Focus on why it stuck with you, not the full summary.`
-      },
-      {
-        text: `What’s a weird or surprising skill you have?`,
-        category: `Fun`,
-        hint: `"Useless" or niche skills totally count here.`
-      },
-      {
-        text: `If you could master any language instantly, which would you choose and why?`,
-        category: `Fun`,
-        hint: `Think of people, travel, or work situations where it would help.`
-      },
-      {
-        text: `What’s a travel destination that left a big impression on you?`,
-        category: `Fun`,
-        hint: `Share one detail – a smell, a view, a feeling.`
-      },
-      {
-        text: `What’s a food you could eat every week and not get bored of?`,
-        category: `Fun`,
-        hint: `Bonus: explain where or when you first tried it.`
-      },
-      {
-        text: `What’s something on your bucket list that feels realistic?`,
-        category: `Fun`,
-        hint: `Think of something you could genuinely do in the next few years.`
-      },
-      {
-        text: `What’s something on your bucket list that feels wild or unlikely?`,
-        category: `Fun`,
-        hint: `Let yourself dream – it doesn’t have to be practical.`
-      },
-      {
-        text: `What’s your ideal Friday afternoon at work?`,
-        category: `Fun`,
-        hint: `Think about energy level, people, and types of tasks.`
-      },
-      {
-        text: `What’s a small thing that instantly improves your day?`,
-        category: `Fun`,
-        hint: `Simple pleasures count – a song, a snack, a message, fresh air.`
-      },
-      {
-        text: `If our team were a band, what would our genre be and why?`,
-        category: `Fun`,
-        hint: `Base it on our vibe and energy, not musical accuracy.`
-      },
-      {
-        text: `Which fictional character would you most like to work with and why?`,
-        category: `Fun`,
-        hint: `Focus on what they’d be like as a teammate.`
-      },
-      {
-        text: `If you could design a fun team ritual, what would it be?`,
-        category: `Fun`,
-        hint: `Think of something small and repeatable, not a huge event.`
-      },
+  { category: "Fun", depth: 1, text: "What’s the best thing you’ve eaten in the last month?", hint: "Restaurant, home-cooked or a petrol station sandwich all count." },
+  { category: "Fun", depth: 1, text: "What’s the most-used app on your phone that isn’t for work?", hint: "Be honest. Screen time doesn’t lie." },
+  { category: "Fun", depth: 1, text: "What’s a film or series you’ve watched more than three times?", hint: "What keeps pulling you back to it?" },
+  { category: "Fun", depth: 1, text: "If you opened a small shop tomorrow, what would it sell?", hint: "Name it too, if you can." },
+  { category: "Fun", depth: 1, text: "What’s a small, everyday thing you’re irrationally good at?", hint: "Parallel parking, packing a dishwasher, guessing film endings…" },
+  { category: "Fun", depth: 1, text: "What was the last thing you bought that you genuinely love?", hint: "Big or small. Why was it worth it?" },
+  { category: "Fun", depth: 1, text: "What’s your go-to karaoke song, even if you’d never actually sing it?", hint: "Hypothetical stage fright is allowed." },
+  { category: "Fun", depth: 1, text: "What job did you want when you were ten years old?", hint: "Is any of that ten-year-old still in what you do now?" },
+  { category: "Fun", depth: 1, text: "What’s a hill you’re willing to die on that really doesn’t matter?", hint: "Pineapple on pizza, the correct way to load a toilet roll, etc." },
+  { category: "Fun", depth: 1, text: "What’s the most interesting place you’ve ever worked from?", hint: "Train, airport floor, kitchen table at a family party…" },
+  { category: "Fun", depth: 1, text: "If your week so far were a weather forecast, what would it be?", hint: "Sunny spells? Fog clearing by Thursday?" },
+  { category: "Fun", depth: 1, text: "What’s the best piece of advice you’ve got from a grandparent or older relative?", hint: "Doesn’t have to be wise. Funny counts." },
+  { category: "Fun", depth: 1, text: "What’s a talent you’d love to have that has no practical use at all?", hint: "Juggling, whistling with two fingers, beatboxing…" },
+  { category: "Fun", depth: 1, text: "What’s your favourite smell, and what does it remind you of?", hint: "Smells are strangely good at unlocking memories." },
+  { category: "Fun", depth: 1, text: "If you could add one public holiday, what would it celebrate?", hint: "Explain how people would mark it." },
+  { category: "Fun", depth: 1, text: "Which emoji do you use far too often?", hint: "Bonus: which one do you refuse to use?" },
+  { category: "Fun", depth: 1, text: "What’s the strangest thing you believed as a child?", hint: "We all had at least one." },
+  { category: "Fun", depth: 1, text: "If our team had a signature snack for meetings, what should it be?", hint: "Campaign for it." },
+  { category: "Fun", depth: 1, text: "What’s a game you could play for hours, from board games to video games?", hint: "Are you competitive about it?" },
+  { category: "Fun", depth: 2, text: "What’s a compliment you received years ago that you still remember?", hint: "Why do you think it stuck?" },
+  { category: "Fun", depth: 2, text: "What’s something you were really into as a teenager that you’d still defend today?", hint: "Bands, hobbies, fashion choices, all fair game." },
+  { category: "Fun", depth: 2, text: "Which place has felt most like home to you, other than where you grew up?", hint: "What made it feel that way?" },
+  { category: "Fun", depth: 2, text: "What’s a skill you’ve picked up from a YouTube video that actually worked?", hint: "Or one that went horribly wrong." },
 
-      // ---------- REFLECT ----------
-      {
-        text: `What was your first job, and what did it teach you?`,
-        category: `Reflect`,
-        hint: `Pick one clear lesson rather than trying to tell the whole story.`
-      },
-      {
-        text: `What’s one thing you’re grateful for this week?`,
-        category: `Reflect`,
-        hint: `Go for something specific rather than “family” or “health” in general.`
-      },
-      {
-        text: `Do you see yourself as more introvert, extrovert, or ambivert – and how does that show up at work?`,
-        category: `Reflect`,
-        hint: `Share one example of when it helps and one when it’s tricky.`
-      },
-      {
-        text: `What’s a personal habit you’re proud of?`,
-        category: `Reflect`,
-        hint: `Think of something you do regularly, even if it seems small.`
-      },
-      {
-        text: `What’s a personal habit you’d like to improve?`,
-        category: `Reflect`,
-        hint: `Be honest, but kind to yourself – it’s about awareness, not judgment.`
-      },
-      {
-        text: `What’s one thing you’re learning about yourself lately?`,
-        category: `Reflect`,
-        hint: `Think of a recent situation that taught you something.`
-      },
-      {
-        text: `When do you feel most confident?`,
-        category: `Reflect`,
-        hint: `Picture a recent moment when you thought, “I’ve got this.”`
-      },
-      {
-        text: `What does a “good day” at work look like for you?`,
-        category: `Reflect`,
-        hint: `Describe what you’re doing, who you’re with, and how it feels.`
-      },
-      {
-        text: `What’s something you used to believe about work that you’ve changed your mind on?`,
-        category: `Reflect`,
-        hint: `Share the “before” belief and the “after” version.`
-      },
-      {
-        text: `What’s a mistake you learned a lot from?`,
-        category: `Reflect`,
-        hint: `Focus on what you learned rather than on blame.`
-      },
-      {
-        text: `When do you feel most engaged at work?`,
-        category: `Reflect`,
-        hint: `Think of a recent task or project where time flew by.`
-      },
-      {
-        text: `What kind of work drains you the fastest?`,
-        category: `Reflect`,
-        hint: `Keep it about the type of work, not specific people.`
-      },
-      {
-        text: `What helps you stay calm under pressure?`,
-        category: `Reflect`,
-        hint: `Share one or two strategies that actually work for you.`
-      },
-      {
-        text: `What’s a value you try to live by at work?`,
-        category: `Reflect`,
-        hint: `Give a small example of that value in action.`
-      },
-      {
-        text: `When have you felt most included on a team?`,
-        category: `Reflect`,
-        hint: `Describe what others did that helped you feel that way.`
-      },
-      {
-        text: `When have you felt left out or unseen on a team?`,
-        category: `Reflect`,
-        hint: `Focus on the behaviour, not attacking anyone.`
-      },
-      {
-        text: `What helps you feel safe to share honest opinions at work?`,
-        category: `Reflect`,
-        hint: `Think of conditions like tone, trust, and how feedback is handled.`
-      },
-      {
-        text: `What’s a boundary you’re glad you set for yourself?`,
-        category: `Reflect`,
-        hint: `Explain how it helped you, not just what it was.`
-      },
-      {
-        text: `What’s a recent moment of joy you’ve had at work?`,
-        category: `Reflect`,
-        hint: `Small moments count – a joke, a message, a quick win.`
-      },
-      {
-        text: `What’s something you’re proud of that you don’t talk about much?`,
-        category: `Reflect`,
-        hint: `Think of a quiet achievement, not just big milestones.`
-      },
+  // ---------- WOULD YOU RATHER ----------
+  { category: "Would You Rather", depth: 1, text: "Would you rather have a four-day week or finish at 2pm every day?", hint: "Same pay, same output. Which wins and why?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather never have another meeting, or never send another email?", hint: "Think about what you’d lose as well as gain." },
+  { category: "Would You Rather", depth: 1, text: "Would you rather work from a beach hut or a cabin in the mountains?", hint: "Assume perfect Wi-Fi either way." },
+  { category: "Would You Rather", depth: 1, text: "Would you rather be able to pause time or rewind it by ten minutes?", hint: "How would you use it at work?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather have a personal chef or a personal driver?", hint: "Which hour of your day would you get back?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather present to 500 strangers or 5 senior leaders?", hint: "Which one makes your palms sweat more?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather be an expert in one thing or pretty good at everything?", hint: "Which describes you today?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather always be 10 minutes early or always 5 minutes late?", hint: "No in-between allowed." },
+  { category: "Would You Rather", depth: 1, text: "Would you rather have a desk with a perfect view or a perfect chair?", hint: "Comfort versus inspiration." },
+  { category: "Would You Rather", depth: 1, text: "Would you rather have instant mastery of a musical instrument or a new language?", hint: "Which one and why?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather start work at 6am or finish at 10pm?", hint: "Are you a lark or an owl?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather get a surprise day off or a surprise bonus?", hint: "Time or money, and how would you spend it?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather only work with written notes or only with phone calls for a month?", hint: "Which would you miss more?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather live without coffee or without music while you work?", hint: "Swap coffee for tea if that’s your fuel." },
+  { category: "Would You Rather", depth: 1, text: "Would you rather travel back 100 years or forward 100 years for a day?", hint: "What would you want to see first?" },
+  { category: "Would You Rather", depth: 1, text: "Would you rather have unlimited holiday or a guaranteed four-week sabbatical every year?", hint: "Freedom versus structure." },
+  { category: "Would You Rather", depth: 2, text: "Would you rather get brutally honest feedback or gentle feedback that takes longer to land?", hint: "What does that say about how you learn?" },
+  { category: "Would You Rather", depth: 2, text: "Would you rather lead a project you don’t believe in or support one you love?", hint: "Status versus meaning." },
+  { category: "Would You Rather", depth: 2, text: "Would you rather be known as the most reliable person on the team or the most creative?", hint: "Which do you think you are known for now?" },
+  { category: "Would You Rather", depth: 2, text: "Would you rather fix a problem fast and imperfectly, or slowly and properly?", hint: "Does your answer change depending on the problem?" },
+  { category: "Would You Rather", depth: 2, text: "Would you rather have a mentor ten years ahead of you or a peer going through the same thing?", hint: "What would each give you?" },
+  { category: "Would You Rather", depth: 2, text: "Would you rather work on one big thing all year or lots of small things?", hint: "Which kind of progress feels better to you?" },
 
-      // ---------- TEAMWORK ----------
-      {
-        text: `What kind of collaboration brings out your best work?`,
-        category: `Teamwork`,
-        hint: `Describe who’s involved, and how you like to interact.`
-      },
-      {
-        text: `What’s a recent moment when you felt proud of our team?`,
-        category: `Teamwork`,
-        hint: `Share what happened and why it mattered to you.`
-      },
-      {
-        text: `What type of support from teammates helps you most?`,
-        category: `Teamwork`,
-        hint: `Think of what makes you feel genuinely backed up.`
-      },
-      {
-        text: `How do you like to handle disagreements on the team?`,
-        category: `Teamwork`,
-        hint: `Describe your preferred tone and approach, not just “I talk it out.”`
-      },
-      {
-        text: `What builds trust for you in a team?`,
-        category: `Teamwork`,
-        hint: `Focus on behaviours like honesty, follow-through, or openness.`
-      },
-      {
-        text: `What quickly erodes trust for you in a team?`,
-        category: `Teamwork`,
-        hint: `Keep it general – talk about patterns, not individuals.`
-      },
-      {
-        text: `How do you prefer to ask for help when you’re stuck?`,
-        category: `Teamwork`,
-        hint: `Mention channel (chat, call, in person) and timing.`
-      },
-      {
-        text: `How do you prefer others to ask *you* for help?`,
-        category: `Teamwork`,
-        hint: `Share how people can approach you in a way that works well.`
-      },
-      {
-        text: `What’s one improvement that would make collaboration smoother here?`,
-        category: `Teamwork`,
-        hint: `Aim for something small and realistic, not a huge overhaul.`
-      },
-      {
-        text: `When have you felt really “in sync” with colleagues?`,
-        category: `Teamwork`,
-        hint: `Describe what made that moment work so well.`
-      },
-      {
-        text: `What do you value most in a teammate?`,
-        category: `Teamwork`,
-        hint: `Pick one or two traits and why they matter to you.`
-      },
-      {
-        text: `What’s a great team experience you’ve had in the past, and why?`,
-        category: `Teamwork`,
-        hint: `Focus on how the team worked together, not just the result.`
-      },
-      {
-        text: `What’s one thing you wish every team would stop doing?`,
-        category: `Teamwork`,
-        hint: `Think of unhelpful habits rather than calling out specific people.`
-      },
-      {
-        text: `What’s one thing you wish every team would start doing?`,
-        category: `Teamwork`,
-        hint: `Suggest a ritual, habit, or behaviour you’d love to see.`
-      },
-      {
-        text: `What’s something you’ve learned from someone on this team?`,
-        category: `Teamwork`,
-        hint: `Name the lesson more than the person, if that feels easier.`
-      },
-      {
-        text: `What kind of meetings do you find genuinely helpful?`,
-        category: `Teamwork`,
-        hint: `Describe the purpose, length, and vibe that work for you.`
-      },
-      {
-        text: `What’s one way we could make meetings 10% better?`,
-        category: `Teamwork`,
-        hint: `Small tweaks count – timing, agenda, participation, etc.`
-      },
-      {
-        text: `What helps you listen well to others in a discussion?`,
-        category: `Teamwork`,
-        hint: `Think of habits like summarising, asking questions, or slowing down.`
-      },
-      {
-        text: `What do you need from others when you’re having a tough day?`,
-        category: `Teamwork`,
-        hint: `Be specific – silence, check-ins, humour, practical help?`
-      },
-      {
-        text: `What’s a time when someone really showed up for you at work?`,
-        category: `Teamwork`,
-        hint: `Share what they did and how it made you feel.`
-      },
+  // ---------- REFLECT ----------
+  { category: "Reflect", depth: 1, text: "What’s gone better than you expected in the last month?", hint: "Work or life. Small wins count." },
+  { category: "Reflect", depth: 1, text: "What’s one thing you did this week that you want to do again?", hint: "Something that worked, felt good or saved time." },
+  { category: "Reflect", depth: 1, text: "What’s the most useful thing you learned this quarter?", hint: "Could be a tool, a fact, or something about a person." },
+  { category: "Reflect", depth: 1, text: "What’s a moment from this year you’d put on a highlights reel?", hint: "Paint the picture for us." },
+  { category: "Reflect", depth: 1, text: "What part of your job would surprise someone outside our industry?", hint: "The bit nobody sees from the outside." },
+  { category: "Reflect", depth: 2, text: "What’s something you’re doing differently now than you were a year ago?", hint: "What prompted the change?" },
+  { category: "Reflect", depth: 2, text: "Which piece of work are you quietly most proud of?", hint: "The thing you’d show someone if no one was watching." },
+  { category: "Reflect", depth: 2, text: "What’s a decision you made recently that you’d make differently now?", hint: "Focus on what you learned, not on blame." },
+  { category: "Reflect", depth: 2, text: "What’s a piece of advice you ignored that turned out to be right?", hint: "Who gave it to you?" },
+  { category: "Reflect", depth: 2, text: "When did you last lose track of time because you were so absorbed in a task?", hint: "What were you doing, and what made it feel that way?" },
+  { category: "Reflect", depth: 2, text: "What’s an assumption you had about this team when you joined that turned out to be wrong?", hint: "In a good way or a surprising way." },
+  { category: "Reflect", depth: 2, text: "What do you find easy that others seem to find hard?", hint: "This is often a hidden strength." },
+  { category: "Reflect", depth: 2, text: "What’s a recent problem that turned out to be simpler than it first looked?", hint: "What made it look so big?" },
+  { category: "Reflect", depth: 2, text: "Which part of your work gives you the most energy right now, and which takes the most?", hint: "Try to name one of each." },
+  { category: "Reflect", depth: 2, text: "What’s a habit from a previous job that you’ve kept, and one you’ve dropped?", hint: "Why did one stay and the other go?" },
+  { category: "Reflect", depth: 2, text: "What’s something you’ve stopped worrying about?", hint: "What changed?" },
+  { category: "Reflect", depth: 2, text: "What would your colleagues say is your superpower? Do you agree?", hint: "It’s fine to be a bit modest, but try not to dodge it." },
+  { category: "Reflect", depth: 3, text: "What’s a moment at work when you felt out of your depth, and how did you get through it?", hint: "Sharing this helps others feel less alone." },
+  { category: "Reflect", depth: 3, text: "What’s a belief about yourself you’ve had to let go of?", hint: "Take your time with this one." },
+  { category: "Reflect", depth: 3, text: "When have you been at your best this year, and what was around you at the time?", hint: "People, environment, timing, type of work." },
+  { category: "Reflect", depth: 3, text: "What’s one thing you wish you’d known when you started this role?", hint: "Could help the next person who joins." },
+  { category: "Reflect", depth: 3, text: "What’s a time you changed someone’s mind, or they changed yours?", hint: "What actually did the convincing?" },
+  { category: "Reflect", depth: 3, text: "What would you want to be remembered for if you left this team tomorrow?", hint: "Think about how people felt working with you." },
 
-      // ---------- GROWTH ----------
-      {
-        text: `What skill are you currently working on (or want to work on)?`,
-        category: `Growth`,
-        hint: `Think of something realistic for the next 6–12 months.`
-      },
-      {
-        text: `What’s a challenge you’ve overcome that you’re proud of?`,
-        category: `Growth`,
-        hint: `Briefly outline the challenge and one thing you learned.`
-      },
-      {
-        text: `What kind of work stretches you in a good way?`,
-        category: `Growth`,
-        hint: `Think of tasks where you feel nervous *and* excited.`
-      },
-      {
-        text: `What’s something you’d like to get better at saying “no” to?`,
-        category: `Growth`,
-        hint: `Focus on the type of request rather than specific people.`
-      },
-      {
-        text: `What kind of opportunities are you hoping to see more of?`,
-        category: `Growth`,
-        hint: `Think of project types, roles, or responsibilities.`
-      },
-      {
-        text: `What’s one risk you’re glad you took?`,
-        category: `Growth`,
-        hint: `Share how it felt before and after taking the risk.`
-      },
-      {
-        text: `What would you tell your younger self about work?`,
-        category: `Growth`,
-        hint: `Pick one key message rather than many.`
-      },
-      {
-        text: `What’s an area you’d enjoy mentoring others in?`,
-        category: `Growth`,
-        hint: `Think of something you’re confident and experienced in.`
-      },
-      {
-        text: `What’s an area where you’d love a mentor or guide?`,
-        category: `Growth`,
-        hint: `Be as specific as you’re comfortable with – topics or skills.`
-      },
-      {
-        text: `How do you usually react when a project goes off track?`,
-        category: `Growth`,
-        hint: `Be honest, then mention what helps you course-correct.`
-      },
-      {
-        text: `What does “career success” mean to you beyond job title?`,
-        category: `Growth`,
-        hint: `Think of feelings, impact, and lifestyle, not just status.`
-      },
-      {
-        text: `What’s a future skill you think will be important in our work?`,
-        category: `Growth`,
-        hint: `Consider trends you’re already noticing in our industry.`
-      },
-      {
-        text: `In an ideal world, what would your role look like in three years?`,
-        category: `Growth`,
-        hint: `Describe the kind of work you’d be doing, not just a title.`
-      },
-      {
-        text: `What’s a dream collaboration you’d love to be part of?`,
-        category: `Growth`,
-        hint: `This could be a type of team, project, or partner.`
-      },
-      {
-        text: `What’s a time you surprised yourself with what you could do?`,
-        category: `Growth`,
-        hint: `Share what felt “bigger” than your comfort zone.`
-      },
-      {
-        text: `What’s a question you think our team should be asking more often?`,
-        category: `Growth`,
-        hint: `Choose a question that opens up thinking, not blame.`
-      },
-      {
-        text: `What’s something you’ve changed your mind about recently?`,
-        category: `Growth`,
-        hint: `Explain briefly what shifted your perspective.`
-      },
-      {
-        text: `What’s a goal you’re working toward that matters to you personally?`,
-        category: `Growth`,
-        hint: `It can be small – consistency beats size.`
-      },
-      {
-        text: `What kind of work would you like to do more of, if you could choose?`,
-        category: `Growth`,
-        hint: `Think of tasks that feel meaningful or energising to you.`
-      },
-      {
-        text: `What’s one thing your future self might thank you for doing this month?`,
-        category: `Growth`,
-        hint: `Think of a tiny habit, decision, or conversation.`
-      },
+  // ---------- TEAMWORK ----------
+  { category: "Teamwork", depth: 1, text: "What’s something this team does well that other teams could copy?", hint: "Be specific: a habit, a ritual, a way of working." },
+  { category: "Teamwork", depth: 1, text: "Who on the team helped you recently without being asked?", hint: "Say thank you while you’re at it." },
+  { category: "Teamwork", depth: 1, text: "What’s a shared win from the last few months we didn’t celebrate enough?", hint: "Let’s celebrate it now." },
+  { category: "Teamwork", depth: 1, text: "What’s one thing you’d love to learn from someone in this room?", hint: "Name the person if you’re comfortable." },
+  { category: "Teamwork", depth: 1, text: "If our team were a sports team, what position would you play?", hint: "Striker, goalkeeper, coach, the one bringing the oranges?" },
+  { category: "Teamwork", depth: 1, text: "What’s a tool or shortcut you use that the rest of the team should know about?", hint: "Share the wealth." },
+  { category: "Teamwork", depth: 2, text: "When does this team work at its best?", hint: "Think of a specific project or week." },
+  { category: "Teamwork", depth: 2, text: "What’s one thing that slows us down as a team that we could fix quickly?", hint: "Keep it practical rather than big and abstract." },
+  { category: "Teamwork", depth: 2, text: "How do you like to be brought into a piece of work: early and rough, or later and polished?", hint: "There’s no right answer, just different preferences." },
+  { category: "Teamwork", depth: 2, text: "What does a good handover look like to you?", hint: "What should always be included?" },
+  { category: "Teamwork", depth: 2, text: "What’s something you’d like more of from the rest of the team?", hint: "Phrase it as a request, not a complaint." },
+  { category: "Teamwork", depth: 2, text: "What’s an unwritten rule on this team that a new starter would need to know?", hint: "The things nobody writes in the onboarding doc." },
+  { category: "Teamwork", depth: 2, text: "When work gets busy, what’s the first thing that slips for us as a team?", hint: "How could we protect it?" },
+  { category: "Teamwork", depth: 2, text: "How do you know when a teammate needs help but hasn’t asked?", hint: "What signals do you look for?" },
+  { category: "Teamwork", depth: 2, text: "What makes a meeting feel worth your time?", hint: "Think of the last good one." },
+  { category: "Teamwork", depth: 2, text: "What would make it easier to say “I don’t know” on this team?", hint: "It’s a sign of a healthy team when people can." },
+  { category: "Teamwork", depth: 2, text: "What’s one thing we should stop doing, one we should start, and one we should keep?", hint: "A classic for a reason." },
+  { category: "Teamwork", depth: 2, text: "How should we decide things when we don’t all agree?", hint: "Vote, owner decides, disagree and commit…?" },
+  { category: "Teamwork", depth: 3, text: "What’s something you’ve been hesitant to raise with the team?", hint: "Share as much or as little as feels right." },
+  { category: "Teamwork", depth: 3, text: "When have you felt most trusted by this team?", hint: "What did people do that made you feel it?" },
+  { category: "Teamwork", depth: 3, text: "What’s a mistake we made as a team that taught us something useful?", hint: "Focus on the lesson, not the blame." },
+  { category: "Teamwork", depth: 3, text: "What does this team need more of to get through the next six months well?", hint: "Think people, time, clarity, energy." },
+  { category: "Teamwork", depth: 3, text: "How do we treat people when things go wrong, and is that how we want to be?", hint: "This one is worth taking slowly." },
 
-      // ---------- PRODUCTIVITY & HABITS ----------
-      {
-        text: `What’s your favourite way to start the morning?`,
-        category: `Productivity`,
-        hint: `Describe what sets you up well – not just coffee!`
-      },
-      {
-        text: `What type of environment helps you focus best?`,
-        category: `Productivity`,
-        hint: `Think of noise level, people, tools, and time of day.`
-      },
-      {
-        text: `What’s one habit that helps you be productive?`,
-        category: `Productivity`,
-        hint: `Share something others might realistically try as well.`
-      },
-      {
-        text: `What’s one habit that makes you less productive?`,
-        category: `Productivity`,
-        hint: `Be honest but gentle – we all have them.`
-      },
-      {
-        text: `When do you do your best deep-focus work?`,
-        category: `Productivity`,
-        hint: `Think about time of day and conditions around you.`
-      },
-      {
-        text: `What’s a productivity tip that genuinely works for you?`,
-        category: `Productivity`,
-        hint: `Choose something small and concrete, not a complex system.`
-      },
-      {
-        text: `What’s your “work soundtrack” – silence, music, background noise?`,
-        category: `Productivity`,
-        hint: `Mention if it changes depending on the type of task.`
-      },
-      {
-        text: `What’s a routine or ritual that helps you switch off from work?`,
-        category: `Productivity`,
-        hint: `Think of a specific end-of-day action, not just “stop working”.`
-      },
-      {
-        text: `What’s a small boundary that’s made a big difference for you?`,
-        category: `Productivity`,
-        hint: `Example: no email after a certain time, or no meetings at certain hours.`
-      },
-      {
-        text: `What’s a sign that you might be heading toward burnout?`,
-        category: `Productivity`,
-        hint: `Think of your personal early warning signs.`
-      },
-      {
-        text: `What helps you come back from feeling burnt out or exhausted?`,
-        category: `Productivity`,
-        hint: `Share one or two things you know help in real life.`
-      },
-      {
-        text: `What boundaries are you still learning to set?`,
-        category: `Productivity`,
-        hint: `Think about where you often say “yes” when you wish you didn’t.`
-      },
-      {
-        text: `What’s one small change that would make your day-to-day work easier?`,
-        category: `Productivity`,
-        hint: `Aim for something realistic that’s within team control.`
-      },
-      {
-        text: `What helps you switch from “busy mode” to “focused mode”?`,
-        category: `Productivity`,
-        hint: `Think of triggers – timer, checklist, blocking time, etc.`
-      },
-      {
-        text: `What’s a small daily habit that would improve your work if you stuck with it?`,
-        category: `Productivity`,
-        hint: `Keep it tiny – something you can do in 5 minutes or less.`
-      },
-      {
-        text: `What do you do when you see someone else having a tough day at work?`,
-        category: `Productivity`,
-        hint: `Share what you try to do, even if you’re still learning.`
-      },
-      {
-        text: `What do you need from others when you’re overloaded?`,
-        category: `Productivity`,
-        hint: `Think of communication style and practical support.`
-      },
-      {
-        text: `What’s your relationship with deadlines – friend, foe, or motivator?`,
-        category: `Productivity`,
-        hint: `Explain how they affect your behaviour and mood.`
-      },
-      {
-        text: `What’s something you’d love to simplify in our work?`,
-        category: `Productivity`,
-        hint: `Think of a process, tool, or habit that feels more complex than needed.`
-      },
-      {
-        text: `What helps you feel more grounded on a busy day?`,
-        category: `Productivity`,
-        hint: `Think of something you can do even in 1–2 minutes.`
-      },
+  // ---------- COMMUNICATION ----------
+  { category: "Communication", depth: 1, text: "What’s the best way to get a quick answer from you?", hint: "Chat, email, call, walk over to your desk?" },
+  { category: "Communication", depth: 1, text: "What’s a phrase or bit of jargon you hear at work that you’d happily ban?", hint: "“Circle back” and “synergy” are already on the list." },
+  { category: "Communication", depth: 1, text: "Camera on or camera off for video calls, and why?", hint: "No judgement either way." },
+  { category: "Communication", depth: 1, text: "What’s your response time expectation for messages, and what do you think others expect of you?", hint: "Do those two answers match?" },
+  { category: "Communication", depth: 1, text: "What makes an email or message easy for you to act on?", hint: "Length, structure, a clear ask…" },
+  { category: "Communication", depth: 2, text: "What’s something people often misread about how you communicate?", hint: "Tone, silence, speed, bluntness?" },
+  { category: "Communication", depth: 2, text: "What does “urgent” really mean to you?", hint: "We probably all have different definitions." },
+  { category: "Communication", depth: 2, text: "How do you like to be told that something you’ve done isn’t working?", hint: "Privately, in writing, straight away, with time to think?" },
+  { category: "Communication", depth: 2, text: "How can people tell when you disagree but aren’t saying it?", hint: "Your tells might surprise the team." },
+  { category: "Communication", depth: 2, text: "Who’s someone you think explains things really well, and what do they do?", hint: "Inside or outside work." },
+  { category: "Communication", depth: 2, text: "What should always go in a message rather than a call, and what should always be a call?", hint: "Let’s agree a few team defaults." },
+  { category: "Communication", depth: 2, text: "When you’re thinking out loud, how should people respond?", hint: "Jump in, or let you finish?" },
+  { category: "Communication", depth: 2, text: "What’s the most useful piece of feedback you’ve ever received?", hint: "How was it delivered?" },
+  { category: "Communication", depth: 2, text: "How do you prefer to be recognised for good work?", hint: "Public shout-out, quiet thank you, or something else?" },
+  { category: "Communication", depth: 2, text: "What’s a question you wish people asked you more often?", hint: "What would it open up?" },
+  { category: "Communication", depth: 2, text: "When do you go quiet in meetings, and what would help you speak up?", hint: "This helps the team make space." },
+  { category: "Communication", depth: 2, text: "How do you like to receive bad news?", hint: "Straight away, with a plan, in person?" },
+  { category: "Communication", depth: 3, text: "What’s a conversation you’ve been putting off, and what’s making it hard?", hint: "No need to share details or names." },
+  { category: "Communication", depth: 3, text: "When did someone really listen to you, and how could you tell?", hint: "What did they do differently?" },
+  { category: "Communication", depth: 3, text: "What’s something you find hard to ask for at work?", hint: "Help, time, recognition, clarity…" },
+  { category: "Communication", depth: 3, text: "What’s a piece of feedback you’ve been meaning to give this team?", hint: "Keep it kind, specific and useful." },
+  { category: "Communication", depth: 3, text: "How do you want people to check in on you when you seem off?", hint: "Some like a direct question, others like a gentle nudge." },
 
-      // ---------- WELLBEING & BALANCE ----------
-      {
-        text: `What does a healthy work–life balance look like to you?`,
-        category: `Wellbeing`,
-        hint: `Describe how you’d like your energy and time to feel across a week.`
-      },
-      {
-        text: `What’s one small thing you do to look after your mental health?`,
-        category: `Wellbeing`,
-        hint: `Think of simple practices, not huge routines.`
-      },
-      {
-        text: `How do you know when you need a break?`,
-        category: `Wellbeing`,
-        hint: `Share your personal “early warning signs”.`
-      },
-      {
-        text: `What’s a simple way you recharge after a long day?`,
-        category: `Wellbeing`,
-        hint: `Think of something accessible you actually do.`
-      },
-      {
-        text: `What helps you feel safe to be yourself at work?`,
-        category: `Wellbeing`,
-        hint: `Think of team norms, reactions, and trust.`
-      },
-      {
-        text: `What’s a boundary that protects your wellbeing?`,
-        category: `Wellbeing`,
-        hint: `Share how you communicate or maintain it.`
-      },
-      {
-        text: `What’s something you’ve learned about managing stress?`,
-        category: `Wellbeing`,
-        hint: `Share one practical thing that really helps you.`
-      },
-      {
-        text: `What brings you energy outside of work?`,
-        category: `Wellbeing`,
-        hint: `Think of hobbies, people, or places that recharge you.`
-      },
-      {
-        text: `What’s one thing that makes you feel valued as a person, not just an employee?`,
-        category: `Wellbeing`,
-        hint: `It might be how feedback is given, how you’re included, or how people check in.`
-      },
-      {
-        text: `When do you feel most present and “in the moment”?`,
-        category: `Wellbeing`,
-        hint: `Think of times when you’re not multitasking or worrying about later.`
-      },
-      {
-        text: `What’s a self-care tip you wish someone had told you earlier in your career?`,
-        category: `Wellbeing`,
-        hint: `Choose something you’ve learned the hard way.`
-      },
-      {
-        text: `How do you like teammates to respond when you say you’re not okay?`,
-        category: `Wellbeing`,
-        hint: `Share what’s helpful and what’s not so helpful.`
-      },
-      {
-        text: `What role does humour play for you at work?`,
-        category: `Wellbeing`,
-        hint: `Think of how it helps – or sometimes doesn’t – in your day.`
-      },
-      {
-        text: `What’s something you do that future-you will be glad you prioritised?`,
-        category: `Wellbeing`,
-        hint: `It might be sleep, exercise, relationships, or boundaries.`
-      },
-      {
-        text: `How do you reset after a conflict or stressful meeting?`,
-        category: `Wellbeing`,
-        hint: `Share one small action that helps you reset.`
-      },
-      {
-        text: `What does “rest” look like for you (aside from sleep)?`,
-        category: `Wellbeing`,
-        hint: `Think of activities that genuinely feel restful, not just distractions.`
-      },
-      {
-        text: `When do you feel most supported by your workplace?`,
-        category: `Wellbeing`,
-        hint: `Describe policies, behaviours, or moments that helped.`
-      },
-      {
-        text: `What’s a wellbeing habit you’d love to start but haven’t yet?`,
-        category: `Wellbeing`,
-        hint: `Keep it realistic – something you could start small.`
-      },
-      {
-        text: `What helps you feel hopeful during challenging times at work?`,
-        category: `Wellbeing`,
-        hint: `Think of people, reminders, or perspectives that keep you going.`
-      },
-      {
-        text: `If you had a “mental health day” completely free, how would you spend it?`,
-        category: `Wellbeing`,
-        hint: `Describe what would feel genuinely restorative to you.`
-      },
+  // ---------- GROWTH ----------
+  { category: "Growth", depth: 1, text: "What’s something you’re curious about at the moment?", hint: "Doesn’t have to be work-related." },
+  { category: "Growth", depth: 1, text: "What’s the best course, book or video that’s helped you at work?", hint: "Would you recommend it to the team?" },
+  { category: "Growth", depth: 1, text: "What’s a skill someone on this team has that you’d like to borrow?", hint: "Tell them. They’ll appreciate it." },
+  { category: "Growth", depth: 1, text: "What’s a new tool or technology you want to get your hands on?", hint: "What would you try first?" },
+  { category: "Growth", depth: 1, text: "How do you learn best: reading, watching, doing or talking it through?", hint: "Does the team know that about you?" },
+  { category: "Growth", depth: 2, text: "What’s something you were bad at that you’re now good at?", hint: "How did you close the gap?" },
+  { category: "Growth", depth: 2, text: "What would you work on if you had two uninterrupted weeks to learn anything?", hint: "Be ambitious." },
+  { category: "Growth", depth: 2, text: "What feedback have you had more than once?", hint: "Patterns are worth paying attention to." },
+  { category: "Growth", depth: 2, text: "What’s a part of your job you’d like to hand over so you can grow elsewhere?", hint: "Could it be a growth opportunity for someone else?" },
+  { category: "Growth", depth: 2, text: "Who’s had the biggest influence on how you work, and what did they teach you?", hint: "A boss, colleague, teacher or family member." },
+  { category: "Growth", depth: 2, text: "What’s a stretch task you’d like to take on in the next three months?", hint: "Saying it out loud makes it more likely to happen." },
+  { category: "Growth", depth: 2, text: "What’s the most valuable thing you’ve learned from a failure?", hint: "Keep it to the lesson if the story is too long." },
+  { category: "Growth", depth: 2, text: "Which skill do you think will matter most in our field in five years?", hint: "Are any of us building it now?" },
+  { category: "Growth", depth: 2, text: "What’s something you could teach the team in 15 minutes?", hint: "Maybe we should book that session." },
+  { category: "Growth", depth: 2, text: "What’s a piece of work you’d love to redo now that you know more?", hint: "What would you change?" },
+  { category: "Growth", depth: 2, text: "What does a good mentor do that a good manager doesn’t?", hint: "Have you had either?" },
+  { category: "Growth", depth: 2, text: "How do you know when you’ve truly learned something?", hint: "When you can teach it? When it feels easy?" },
+  { category: "Growth", depth: 3, text: "What’s holding you back from something you want to try?", hint: "Time, confidence, permission, money?" },
+  { category: "Growth", depth: 3, text: "Where would you like to be in three years, and what’s the next small step?", hint: "The small step matters more than the big picture." },
+  { category: "Growth", depth: 3, text: "What does success look like for you, if you take job titles out of it?", hint: "Think about how you want your days to feel." },
+  { category: "Growth", depth: 3, text: "What’s a fear that’s held you back at work, and how are you handling it?", hint: "Share only what you’re comfortable with." },
+  { category: "Growth", depth: 3, text: "How could this team better support your growth?", hint: "Specific asks are easiest to act on." },
 
-      // ---------- COMMUNICATION ----------
-      {
-        text: `How do you prefer to receive feedback?`,
-        category: `Communication`,
-        hint: `Think about timing, tone, and level of detail that works for you.`
-      },
-      {
-        text: `How do you prefer to give feedback to others?`,
-        category: `Communication`,
-        hint: `Share any principles you try to follow when you give feedback.`
-      },
-      {
-        text: `What’s a communication habit that really helps teams work well together?`,
-        category: `Communication`,
-        hint: `Think of something small but consistent, like quick check-ins or summaries.`
-      },
-      {
-        text: `What’s a communication habit that often causes confusion or tension?`,
-        category: `Communication`,
-        hint: `Keep it about patterns, not individual people.`
-      },
-      {
-        text: `Do you prefer written messages, calls, or face-to-face conversations for most things? Why?`,
-        category: `Communication`,
-        hint: `Think about what helps you understand and respond best.`
-      },
-      {
-        text: `When do you find it hardest to speak up?`,
-        category: `Communication`,
-        hint: `Share what the situation feels like, not just the topic.`
-      },
-      {
-        text: `What helps you feel heard in a group discussion?`,
-        category: `Communication`,
-        hint: `Think of behaviours from others that make a difference.`
-      },
-      {
-        text: `What’s one thing people can do to make it easier for you to share ideas?`,
-        category: `Communication`,
-        hint: `It might be giving time to think, asking specific questions, etc.`
-      },
-      {
-        text: `How do you like complex information to be shared with you?`,
-        category: `Communication`,
-        hint: `Think of format – visuals, bullets, demos, live walk-through, etc.`
-      },
-      {
-        text: `What’s a memorable example of good communication you’ve experienced at work?`,
-        category: `Communication`,
-        hint: `Explain what made it clear or respectful.`
-      },
-      {
-        text: `What’s a memorable example of poor communication you’ve experienced (without naming names)?`,
-        category: `Communication`,
-        hint: `Focus on what went wrong in the process, not on blaming.`
-      },
-      {
-        text: `How do you like to handle misunderstandings or miscommunications?`,
-        category: `Communication`,
-        hint: `Describe your preferred first step – clarify, call, write, etc.`
-      },
-      {
-        text: `What helps you give honest feedback without feeling unkind?`,
-        category: `Communication`,
-        hint: `Think of phrases or approaches that feel respectful.`
-      },
-      {
-        text: `What’s one thing you’d like people to understand about your communication style?`,
-        category: `Communication`,
-        hint: `Share something that might not be obvious at first.`
-      },
-      {
-        text: `How do you balance listening and speaking in meetings?`,
-        category: `Communication`,
-        hint: `Be honest about your tendency and how you manage it.`
-      },
-      {
-        text: `When do you appreciate direct communication the most?`,
-        category: `Communication`,
-        hint: `Think of situations where clarity is more important than softness.`
-      },
-      {
-        text: `When do you appreciate extra sensitivity in communication?`,
-        category: `Communication`,
-        hint: `Consider topics or times when a gentler tone really helps.`
-      },
-      {
-        text: `What’s a phrase or question you find really helpful in tough conversations?`,
-        category: `Communication`,
-        hint: `Share something you’ve heard or use yourself.`
-      },
-      {
-        text: `How do you like to celebrate or acknowledge wins with the team?`,
-        category: `Communication`,
-        hint: `Think of shout-outs, messages, rituals, or small gestures.`
-      },
-      {
-        text: `What’s one small communication change that could improve our teamwork?`,
-        category: `Communication`,
-        hint: `Aim for a practical, low-effort suggestion.`
-      },
+  // ---------- PRODUCTIVITY ----------
+  { category: "Productivity", depth: 1, text: "What’s your favourite keyboard shortcut or time-saving trick?", hint: "Demonstrate it if you can." },
+  { category: "Productivity", depth: 1, text: "What time of day is your brain sharpest?", hint: "Do you protect that time?" },
+  { category: "Productivity", depth: 1, text: "To-do list: paper, app, or entirely in your head?", hint: "Show us your system." },
+  { category: "Productivity", depth: 1, text: "What’s the first thing you do when you start work?", hint: "Emails first, or something else?" },
+  { category: "Productivity", depth: 1, text: "What’s your biggest distraction during the working day?", hint: "Notifications, people, snacks, the news?" },
+  { category: "Productivity", depth: 1, text: "What’s one app, tool or gadget that has genuinely made your work easier?", hint: "Would you recommend it?" },
+  { category: "Productivity", depth: 1, text: "How many browser tabs do you have open right now?", hint: "No closing them before you answer." },
+  { category: "Productivity", depth: 2, text: "What’s one recurring task we could automate, simplify or stop entirely?", hint: "What would we lose if it disappeared?" },
+  { category: "Productivity", depth: 2, text: "How do you decide what to work on first when everything feels urgent?", hint: "Do you have a method?" },
+  { category: "Productivity", depth: 2, text: "What does a perfectly productive day look like for you, from start to finish?", hint: "Walk us through it." },
+  { category: "Productivity", depth: 2, text: "What’s a meeting we could replace with a message or a document?", hint: "Be bold, but kind." },
+  { category: "Productivity", depth: 2, text: "How do you get going again after being interrupted?", hint: "Any tricks for finding your place again?" },
+  { category: "Productivity", depth: 2, text: "When do you know a piece of work is “done enough”?", hint: "Perfectionists, this one’s for you." },
+  { category: "Productivity", depth: 2, text: "What’s a process here that made sense once but doesn’t any more?", hint: "Why do you think we still do it?" },
+  { category: "Productivity", depth: 2, text: "How do you protect time for deep work?", hint: "Calendar blocks, headphones, hiding somewhere?" },
+  { category: "Productivity", depth: 2, text: "What’s something you procrastinate on, and why do you think that is?", hint: "Usually the task isn’t the real problem." },
+  { category: "Productivity", depth: 2, text: "What’s the most useful bit of documentation you’ve ever found here?", hint: "And what do you wish was written down?" },
+  { category: "Productivity", depth: 2, text: "How do you plan your week?", hint: "Sunday evening, Monday morning, or not at all?" },
+  { category: "Productivity", depth: 3, text: "What’s one thing you’d say no to if you knew there’d be no consequences?", hint: "This shows us where our priorities may be off." },
+  { category: "Productivity", depth: 3, text: "Where does your time go that doesn’t feel like it adds value?", hint: "We can only fix what we can see." },
+  { category: "Productivity", depth: 3, text: "What would you need to stop doing to free up a whole day a week?", hint: "Dream big, then pick one thing to act on." },
+  { category: "Productivity", depth: 3, text: "What’s the hidden work you do that nobody sees?", hint: "Let’s make it visible." },
 
-      // ---------- ABOUT WORK & PURPOSE ----------
-      {
-        text: `What part of your work feels most meaningful to you right now?`,
-        category: `Reflect`,
-        hint: `Think of moments where you feel you’re making a difference.`
-      },
-      {
-        text: `What’s something you’d like our team to be known for?`,
-        category: `Teamwork`,
-        hint: `Imagine what people say about us at our best.`
-      },
-      {
-        text: `When do you feel most connected to the bigger purpose of what we do?`,
-        category: `Growth`,
-        hint: `Think of situations where the impact feels real.`
-      },
-      {
-        text: `What’s a value you see our team living well?`,
-        category: `Teamwork`,
-        hint: `Share a recent example that shows it.`
-      },
-      {
-        text: `What’s a value you’d like to see us live more consistently?`,
-        category: `Growth`,
-        hint: `Keep it constructive – think of possibilities, not criticism.`
-      },
-      {
-        text: `What motivates you more: solving problems, helping people, building things, or something else?`,
-        category: `Reflect`,
-        hint: `Pick the main one for you and explain why.`
-      },
-      {
-        text: `What does “doing a good job” mean to you on a normal day?`,
-        category: `Reflect`,
-        hint: `Think of 2–3 indicators that you look for.`
-      },
-      {
-        text: `What’s one way you like to go “above and beyond” when you can?`,
-        category: `Growth`,
-        hint: `Describe something extra you enjoy bringing to your work.`
-      },
-      {
-        text: `What’s a type of work you’d happily never do again?`,
-        category: `Productivity`,
-        hint: `Keep it about task type rather than a particular project.`
-      },
-      {
-        text: `When have you felt really proud to tell someone about your job or team?`,
-        category: `Reflect`,
-        hint: `Share what you said or what reaction you got.`
-      },
-
-      // ---------- FUN “WHAT IF” & FUTURE ----------
-      {
-        text: `If you could swap roles with someone on the team for a day, who would it be and why?`,
-        category: `Fun`,
-        hint: `Focus on curiosity about their work, not hierarchy.`
-      },
-      {
-        text: `If you could automate one part of your job, what would it be?`,
-        category: `Fun`,
-        hint: `Think of repetitive or boring tasks you’d happily hand to a robot.`
-      },
-      {
-        text: `If our team had a mascot, what would it be and why?`,
-        category: `Fun`,
-        hint: `Base it on our personality, not just your favourite animal.`
-      },
-      {
-        text: `If you had an extra day each week just for learning, what would you focus on?`,
-        category: `Growth`,
-        hint: `Pick one topic or skill that excites you.`
-      },
-      {
-        text: `If you could instantly improve one workplace skill, what would it be?`,
-        category: `Growth`,
-        hint: `Choose something that would make your daily work easier or more fun.`
-      },
-      {
-        text: `If you won a month off work (fully paid!), how would you spend it?`,
-        category: `Wellbeing`,
-        hint: `Think of rest, exploration, or projects you’d love to do.`
-      },
-      {
-        text: `If our team had a yearly retreat with no agenda, what would you want to do together?`,
-        category: `Teamwork`,
-        hint: `Imagine what would bring connection and fun, not just more work.`
-      },
-      {
-        text: `If you could go back and relive one workday (just to enjoy it again), which would it be?`,
-        category: `Reflect`,
-        hint: `Think of a day that felt particularly good or meaningful.`
-      },
-      {
-        text: `If you could guarantee one thing about our team’s future, what would it be?`,
-        category: `Growth`,
-        hint: `Choose a quality or outcome you’d love us to keep or develop.`
-      },
-      {
-        text: `If you had to pick a one-word theme for this year at work, what would it be?`,
-        category: `Reflect`,
-        hint: `Think of a word that captures your focus, not a goal list.`
-      },
-
-      // ---------- META / TEAM PROCESS ----------
-      {
-        text: `What’s one thing you appreciate about how this team works together?`,
-        category: `Teamwork`,
-        hint: `Share something you’d miss if it disappeared.`
-      },
-      {
-        text: `What’s one thing you’d gently tweak about how this team works together?`,
-        category: `Teamwork`,
-        hint: `Keep it constructive and specific – a small tweak, not a rant.`
-      },
-      {
-        text: `What’s a good question we could ask at the start of more meetings?`,
-        category: `Communication`,
-        hint: `Think of a question that creates connection or clarity.`
-      },
-      {
-        text: `What’s a good question we could ask at the end of more meetings?`,
-        category: `Communication`,
-        hint: `Focus on learning, alignment, or next steps.`
-      },
-      {
-        text: `What’s something we do as a team that you’d love to keep, even if everything else changed?`,
-        category: `Teamwork`,
-        hint: `Pick a ritual, habit, or attitude that feels special.`
-      },
-      {
-        text: `What’s one way you’d like to grow *with* this team over the next year?`,
-        category: `Growth`,
-        hint: `Think of growth that’s shared, not just individual.`
-      },
-      {
-        text: `What’s a conversation you think our team is ready to have, but hasn’t had yet?`,
-        category: `Reflect`,
-        hint: `Think of a topic that could unlock improvement, not just complaints.`
-      },
-      {
-        text: `What’s something you’d like teammates to ask you about more often?`,
-        category: `Fun`,
-        hint: `It might be a skill, hobby, perspective, or experience.`
-      },
-      {
-        text: `What’s something you’d like to ask *other people* on the team more often?`,
-        category: `Teamwork`,
-        hint: `Think of a question that builds understanding or support.`
-      },
-      {
-        text: `What’s one small experiment you’d love this team to try?`,
-        category: `Growth`,
-        hint: `Keep it low-risk and curious – just a test, not a forever change.`
-      },
-
-  // ... ⬇️ Keep the rest of your deck exactly as-is here
-  // (All the REFLECT, TEAMWORK, GROWTH, PRODUCTIVITY, WELLBEING, COMMUNICATION,
-  // ABOUT WORK, WHAT IF, META sections from your current HTML)
+  // ---------- WELLBEING ----------
+  { category: "Wellbeing", depth: 1, text: "What’s your favourite way to spend a lunch break?", hint: "And how often do you actually take one?" },
+  { category: "Wellbeing", depth: 1, text: "What did you do last weekend that you enjoyed?", hint: "Even “absolutely nothing” is a valid answer." },
+  { category: "Wellbeing", depth: 1, text: "What’s something you’re looking forward to in the next few weeks?", hint: "Big plans or small treats." },
+  { category: "Wellbeing", depth: 1, text: "On a scale of one to ten, how’s your energy today, and what would bump it up by one?", hint: "Quick and honest." },
+  { category: "Wellbeing", depth: 1, text: "What’s your favourite way to get outside?", hint: "Walks, sport, gardening, sitting in a beer garden…" },
+  { category: "Wellbeing", depth: 1, text: "What’s a comfort film, meal or song you turn to after a long day?", hint: "Your go-to reset button." },
+  { category: "Wellbeing", depth: 2, text: "How do you switch off at the end of the working day?", hint: "Any rituals that mark the end?" },
+  { category: "Wellbeing", depth: 2, text: "What’s a small thing a colleague can do that makes your day better?", hint: "Tiny actions often matter most." },
+  { category: "Wellbeing", depth: 2, text: "How has the way you look after yourself changed over the years?", hint: "What have you learned?" },
+  { category: "Wellbeing", depth: 2, text: "What does a good break look like for you during the working day?", hint: "Movement, fresh air, chat, silence?" },
+  { category: "Wellbeing", depth: 2, text: "What’s an early warning sign that you’re overloaded?", hint: "Knowing it helps the team notice too." },
+  { category: "Wellbeing", depth: 2, text: "What’s a boundary you hold between work and home?", hint: "How do you keep it in place?" },
+  { category: "Wellbeing", depth: 2, text: "What helps you sleep well before a big day?", hint: "Or what keeps you up?" },
+  { category: "Wellbeing", depth: 2, text: "What’s a hobby that helps you forget about work completely?", hint: "Where does your mind go?" },
+  { category: "Wellbeing", depth: 2, text: "What could we do as a team to make work feel a bit lighter?", hint: "Practical ideas welcome." },
+  { category: "Wellbeing", depth: 2, text: "When did you last take a proper holiday, and what made it restful?", hint: "Or what stopped it from being restful?" },
+  { category: "Wellbeing", depth: 3, text: "What’s weighing on your mind at the moment that we might not know about?", hint: "Share only what you’re comfortable sharing." },
+  { category: "Wellbeing", depth: 3, text: "When work gets stressful, what do you need from the people around you?", hint: "Space, help, humour, a cup of tea?" },
+  { category: "Wellbeing", depth: 3, text: "What does feeling “okay” look like for you, compared with feeling great?", hint: "It’s helpful for others to know the difference." },
+  { category: "Wellbeing", depth: 3, text: "What’s something you’ve learned about yourself from a difficult period?", hint: "Take as long as you need." },
+  { category: "Wellbeing", depth: 3, text: "How can we make it normal on this team to say “I’m not doing great today”?", hint: "What would need to be true?" },
+  { category: "Wellbeing", depth: 3, text: "What gives you a sense of meaning outside of work?", hint: "People, causes, creativity, faith, community…" },
 ];
