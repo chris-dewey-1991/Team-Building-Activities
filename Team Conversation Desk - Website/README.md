@@ -4,7 +4,7 @@
 ![css](https://img.shields.io/badge/CSS3-%231572B6?logo=css3&logoColor=white)
 ![javascript](https://img.shields.io/badge/JavaScript-ES6%2B-yellow?logo=javascript&logoColor=black)
 ![platform](https://img.shields.io/badge/Platform-Web-lightgrey)
-![version](https://img.shields.io/badge/Version-v2.0-purple)
+![version](https://img.shields.io/badge/Version-v3.0-purple)
 ![license](https://img.shields.io/badge/License-MIT-green)
 
 A lightweight, zero-backend web app that helps teams spark meaningful
@@ -20,35 +20,37 @@ and thoughtful discussion through simple, focused prompts.
 
 ## ✨ Features
 
--   🎲 Random card draw with **no repeats** until reshuffle
--   🗂 Category filtering:
-    -   Fun
-    -   Reflect
-    -   Teamwork
-    -   Growth
-    -   Productivity
-    -   Wellbeing
-    -   Communication
--   🌙 Dark & Light mode with saved preference
--   🔄 Safe reshuffle when the deck is exhausted
--   🕘 Recent card history (last 6 cards)
--   ⌨️ Keyboard support (`Enter` to draw)
--   📱 Fully responsive (desktop, tablet, mobile)
+-   🎴 **223 fresh conversation cards** (new in v3.0) across 10 categories:
+    Fun, Would You Rather, Reflect, Teamwork, Communication, Growth,
+    Productivity, Wellbeing, AI and Cyber Security
+-   🌡 **Depth filter**: Light, Medium and Deep, so you can match the
+    questions to how well the group knows each other
+-   🗂 **Multi-select categories**: mix and match any combination
+-   🃏 Real card-flip animation with a full deck, **no repeats** until you
+    reshuffle
+-   ◀ **Back button** and clickable recent-card history to revisit a question
+-   ⏱ Optional **talk timer** (1, 2 or 3 minutes per card)
+-   🖥 **Presenter mode**: full-screen, large text, ideal for screen-sharing
+-   📋 Copy a question to the clipboard in one click
+-   🌙 Light and dark themes (follows your device by default, remembers your
+    choice)
+-   ⌨️ Keyboard shortcuts: `Space` draw, `←` back, `S` shuffle,
+    `F` presenter mode, `T` theme
+-   📱 Fully responsive, accessible (focus states, reduced-motion support)
 -   ⚡ No framework, no backend, no build step
 
 ------------------------------------------------------------------------
 
 ## 🧠 How It Works
 
--   All conversation cards live in `cards.js` as a simple JavaScript
-    array.
--   When the app loads (or is reset), the deck is shuffled.
--   Cards are drawn sequentially from the shuffled deck, ensuring **no
-    duplicates**.
--   Once all cards are used, the user is prompted to reshuffle.
--   Optional hints provide gentle guidance for deeper conversation.
--   Category selection dynamically rebuilds and reshuffles the deck.
--   Theme preference is stored locally using `localStorage`.
+-   All conversation cards live in `cards.js`.
+-   When the app loads (or you shuffle), the cards matching your filters
+    are shuffled into a deck.
+-   Cards are drawn in order from the shuffled deck, so there are **no
+    duplicates** until the deck is finished.
+-   Each card has an optional hint to help people get started.
+-   Your filter, timer and theme choices are saved in your browser
+    (`localStorage`).
 
 ------------------------------------------------------------------------
 
@@ -92,27 +94,32 @@ To add, remove, or edit cards:
 
 1.  Open `cards.js`
 
-2.  Modify the `window.CARDS` array:
+2.  Add a line to the `window.CARDS` array:
 
     ``` js
-    {
-      text: "Your question here",
-      category: "Fun",
-      hint: "Optional guidance text"
-    }
+    { category: "Fun", depth: 1, text: "Your question here", hint: "Optional guidance text" },
     ```
 
+    -   `depth`: `1` = Light, `2` = Medium, `3` = Deep
+
 3.  Save and refresh the page.
+
+To add a new category, add it to `window.CATEGORIES` at the top of
+`cards.js` and (optionally) give it a colour in `styles.css`
+under the "Category colours" section.
 
 ### Supported Categories
 
 -   Fun
+-   Would You Rather
 -   Reflect
 -   Teamwork
+-   Communication
 -   Growth
 -   Productivity
 -   Wellbeing
--   Communication
+-   AI
+-   Cyber Security
 
 ------------------------------------------------------------------------
 
@@ -151,7 +158,7 @@ To add, remove, or edit cards:
 -   No analytics
 -   No cookies
 -   No tracking
--   No data storage beyond local theme preference
+-   No data storage beyond your saved theme and filter preferences in your own browser
 
 All interaction happens entirely in the browser.
 
@@ -175,5 +182,5 @@ If reused publicly or commercially, please credit the original author.
 ## 👤 Author
 
 **Chris Dewey**\
-Version 2.0\
+Version 3.0\
 © Chris Dewey
